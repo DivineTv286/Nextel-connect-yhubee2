@@ -1,1 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Account - Nextel Connect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous">
+    
+    <style>
+        :root {
+            --dark:        #071a0f;
+            --dark-card:   #0b2516;
+            --green-light: #25a060;
+            --gold:        #C9A84C;
+            --gold-light:  #D4A843;
+            --text-muted:  rgba(255, 255, 255, 0.6);
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .payment-container {
+            max-width: 480px;
+            width: 100%;
+            margin: auto;
+            padding: 15px;
+        }
+
+        .payment-card {
+            background: linear-gradient(145deg, #0a2215, #06170e);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .brand-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .brand-header h2 span {
+            color: var(--green-light);
+        }
+
+        /* --- Payment Timer Sheet Component --- */
+        .timer-strip {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px dashed rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            color: #f87171;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .timer-counter {
+            font-family: monospace;
+            font-size: 1rem;
+            font-weight: 800;
+            background: rgba(239, 68, 68, 0.2);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Supported Bank Sheet Panel Component (From IMG_20260701_112145_675.jpg) --- */
+        .bank-info-sheet {
+            background: #ffffff;
+            color: #111827;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 24px;
+        }
+        
+        .sheet-greeting {
+            color: #1e3a8a;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+        
+        .sheet-subtitle {
+            font-size: 0.8rem;
+            color: #4b5563;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        .sheet-subtitle strong {
+            color: #4338ca;
+        }
+
+        .bank-grid-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #374151;
+            background: #f9fafb;
+            margin-bottom: 12px;
+        }
+        .bank-item-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 6px 0;
+        }
+        .bank-divider {
+            color: #d1d5db;
+            font-weight: 400;
+        }
+
+        /* Reconstructed Notice Elements from Image */
+        .sheet-notice-row {
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.72rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.4;
+        }
+        
+        .notice-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+        .notice-danger {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+        .notice-info {
+            background: #e0e7ff;
+            border: 1px solid #c7d2fe;
+            color: #3730a3;
+        }
+
+        .amount-display {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .amount-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+        .amount-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 4px 0;
+        }
+
+        .bank-details-box {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 24px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .detail-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-copy-small {
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .btn-copy-small:hover {
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--gold);
+        }
+
+        .btn-submit-telegram {
+            background: linear-gradient(135deg, #24A1DE, #1d82b2);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .btn-submit-telegram:hover { color: #fff; }
+        .btn-submit-telegram:active { transform: scale(0.99); }
+
+        .btn-back {
+            display: block;
+            text-align: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            margin-top: 16px;
+        }
+
+        .toast-copy {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #071a0f;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <div class="payment-card">
+        
+        <div class="brand-header">
+            <h2>NEXTEL <span>Connect</span></h2>
+            <span class="badge bg-warning text-dark font-monospace" style="font-size: 0.7rem; font-weight: 700;">WORKSPACE ACTIVATION</span>
+        </div>
+
+        <!-- Visual Urgency Payment Countdown Timer Block -->
+        <div class="timer-strip">
+            <i class="fas fa-clock"></i> Secure session expires in: <span class="timer-counter" id="paymentTimer">10:00</span>
+        </div>
+
+        <!-- Premium White Sheet Layout Block mapped from IMG_20260701_112145_675.jpg -->
+        <div class="bank-info-sheet">
+            <div class="sheet-greeting" id="personalGreeting">Hello Team! 👋</div>
+            <div class="sheet-subtitle">You can now make your payments using any of the <strong>following banks:</strong></div>
+            
+            <div class="bank-grid-box">
+                <div class="bank-item-row" style="border-bottom: 1px solid #f3f4f6; padding-bottom:8px;">
+                    <span><i class="fas fa-wallet" style="color:#7c3aed;"></i> PalmPay</span>
+                    <span class="bank-divider">|</span>
+                    <span><i class="fas fa-university" style="color:#0284c7;"></i> Moniepoint</span>
+                </div>
+                <div class="bank-item-row" style="border-bottom: 1px solid #f3f4f6; padding-top:8px; padding-bottom:8px;">
+                    <span><i class="fas fa-layer-group" style="color:#ea580c;"></i> access</span>
+                    <span class="bank-divider">|</span>
+                    <span><i class="fas fa-gavel" style="color:#4c1d95;"></i> kuda.</span>
+                </div>
+                <div class="bank-item-row" style="padding-top:8px;">
+                    <span><i class="fas fa-leaf" style="color:#15803d;"></i> FirstBank</span>
+                    <span class="bank-divider">|</span>
+                    <span><i class="fas fa-chart-square" style="color:#1e3a8a;"></i> Fidelity</span>
+                </div>
+                <div class="text-center mt-2" style="color:#0d9488; font-size: 0.78rem;">
+                    <strong>una BANK</strong>
+                </div>
+            </div>
+
+            <!-- Green Row Confirmation notice alignment -->
+            <div class="sheet-notice-row notice-success">
+                <i class="fas fa-check-circle mt-0.5" style="font-size:0.95rem;"></i>
+                <div>You can also withdraw your earnings using <strong>these same accounts</strong> without any issues.</div>
+            </div>
+
+            <!-- Red Critical Alert Block configuration -->
+            <div class="sheet-notice-row notice-danger">
+                <i class="fas fa-exclamation-triangle mt-0.5" style="font-size:0.95rem;"></i>
+                <div><strong>IMPORTANT NOTICE:</strong> Please <strong>DO NOT</strong> make payments with <strong>OPay</strong>, as withdrawals are not supported with it.</div>
+            </div>
+
+            <!-- Blue instructions footer row layout reference -->
+            <div class="sheet-notice-row notice-info" style="margin-bottom:0; font-size: 0.68rem;">
+                <i class="fas fa-clipboard-list mt-0.5" style="font-size:0.95rem;"></i>
+                <div class="d-flex justify-content-between w-100">
+                    <span>Kindly follow this instruction carefully to avoid any problems.</span>
+                    <span class="text-nowrap ms-1"><strong>Thank you! 🙏</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Fee Display Box -->
+        <div class="amount-display">
+            <div class="amount-label">Required Deposit Amount</div>
+            <div class="amount-val" id="amountText">₦17,500.00</div>
+            <button class="btn-copy-small mt-1" id="copyAmountBtn">
+                <i class="far fa-copy"></i> Copy Amount
+            </button>
+        </div>
+
+        <!-- System Account Matrix -->
+        <div class="bank-details-box">
+            <!-- Account 1: Kuda -->
+            <div class="account-block mb-4 pb-3" style="border-bottom: 1px dashed rgba(255, 255, 255, 0.1);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge bg-secondary text-white font-monospace" style="font-size: 0.65rem; background-color: rgba(255,255,255,0.1) !important;">OPERATING ACCOUNT 1</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Bank Name</span>
+                    <span class="detail-value text-info font-monospace">VICTORY MFB</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Account Number</span>
+                    <span class="detail-value font-monospace">
+                        5241068573
+                        <button class="btn-copy-small" onclick="copyToClipboard('5241068573', 'Account number copied!')">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Account Name</span>
+                    <span class="detail-value text-white-50" style="font-size: 0.85rem;">UWAKMFON AKPANOWO - NEXTEL 1</span>
+                </div>
+            </div>
+
+            <!-- Account 2: Moniepoint -->
+            <div class="account-block">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge bg-secondary text-white font-monospace" style="font-size: 0.65rem; background-color: rgba(255,255,255,0.1) !important;">OPERATING ACCOUNT 2</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Bank Name</span>
+                    <span class="detail-value text-info font-monospace">STANBIC IBTC BANK PLC</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Account Number</span>
+                    <span class="detail-value font-monospace">
+                        5272240997
+                        <button class="btn-copy-small" onclick="copyToClipboard('5272240997', 'Account number copied!')">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Account Name</span>
+                    <span class="detail-value text-white-50" style="font-size: 0.85rem;">OMINIPAY/UWAKMFON AKPANOWO - NEXTEL 2</span>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#" id="telegramLink" target="_blank" class="btn-submit-telegram">
+            <i class="fab fa-telegram-plane"></i> Submit Payment Proof
+        </a>
+
+        <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left me-1"></i> Cancel & Go Back</a>
+    </div>
+</div>
+    
+
+<div class="toast-copy" id="copyToast">Copied!</div>
+
+<script>
+    let rawAmount = "18000"; 
+    let userEmail = "";
+    let userPhone = "";
+
+    try {
+        const rawData = sessionStorage.getItem("nxt_user");
+        if (rawData) {
+            const localUserData = JSON.parse(rawData);
+            
+            if (localUserData.planName === "Nextel Lite") {
+                rawAmount = "12000";
+                document.getElementById("amountText").textContent = "₦12,000.00";
+            }
+            
+            if (localUserData.username) {
+                document.getElementById("personalGreeting").textContent = `Hello, ${localUserData.username}! 👋`;
+            }
+            
+            userEmail = localUserData.email || "";
+            userPhone = localUserData.phone || "";
+        }
+    } catch(e) {
+        console.error("Failed parsing storage context session indicators", e);
+    }
+    document.getElementById("copyAmountBtn").setAttribute("onclick", `copyToClipboard('${rawAmount}', 'Amount copied!')`);
+
+    const baseText = "Hello Coach 👋\n\nI have successfully made payment for NEXTEL registration.\n\nKindly find my payment proof attached below for verification.\n\nEmail Address: " + userEmail + "\nPhone Number: " + userPhone;
+    const encodedText = encodeURIComponent(baseText);
+    document.getElementById("telegramLink").href = `http://t.me/Trustedwakiee?text=${encodedText}`;
+
+
+    // Standard 10 Minute Payment Session Countdown Script
+    let durationSeconds = 10 * 60;
+    const timerDisplay = document.getElementById("paymentTimer");
+    
+    const countdownInterval = setInterval(() => {
+        let minutes = Math.floor(durationSeconds / 60);
+        let seconds = durationSeconds % 60;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timerDisplay.textContent = `${minutes}:${seconds}`;
+
+        if (--durationSeconds < 0) {
+            clearInterval(countdownInterval);
+            timerDisplay.textContent = "EXPIRED";
+            timerDisplay.style.background = "#ef4444";
+        }
+    }, 1000);
+
+    function copyToClipboard(textValue, successMessage) {
+        navigator.clipboard.writeText(textValue).then(() => {
+            const toast = document.getElementById("copyToast");
+            toast.textContent = successMessage;
+            toast.style.opacity = "1";
+            setTimeout(() => { toast.style.opacity = "0"; }, 1800);
+        }).catch(err => {
+            console.error('Could not copy text context variables', err);
+        });
+    }
+</script>
+
+</body>
+</html>
