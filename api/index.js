@@ -16,7 +16,6 @@ export default async function handler(req, res) {
         const apiKey = process.env.BREVO_API_KEY;
         const senderEmail = process.env.SENDER_EMAIL || "divinetv183@gmail.com";
 
-        // Step 1: Save/Upsert user directly into Brevo Contacts list
         await fetch('https://api.brevo.com/v3/contacts', {
             method: 'POST',
             headers: {
@@ -31,11 +30,9 @@ export default async function handler(req, res) {
                     LASTNAME: fullName.split(' ').slice(1).join(' ') || '',
                     PLAN: planName || 'Standard'
                 },
-                updateEnabled: true // Updates user info if they already exist
+                updateEnabled: true
             })
         });
-
-        // Step 2: Send your custom Welcome & Activation Email
         const emailResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
             method: 'POST',
             headers: {
