@@ -537,7 +537,7 @@
         setTimeout(() => err.remove(), 6000);
     }
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const planEl      = document.getElementById("plan");
@@ -576,15 +576,37 @@
                 activated: true
             }));
 
+            setBtn('<i class="fa-solid fa-spinner fa-spin me-2"></i>Sending welcome email…', true);
+
+            // Call the Vercel serverless function route (/api)
+            const response = await fetch("/api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    planName: selectedOpt.value,
+                    amount
+                })
+            });
+
+            const result = await response.json();
+
+            if (!result.success) {
+                console.warn("Email warning:", result.message);
+            }
+
             setBtn('<i class="fa-solid fa-spinner fa-spin me-2"></i>Redirecting…', true);
             
             // Seamlessly head directly over to your dashboard panel
             window.location.href = "dashboard.html";
 
         } catch (err) {
-            console.error("Local data registration storage error:", err);
+            console.error("Local data registration storage or email dispatch error:", err);
             setBtn('<i class="fa-solid fa-lock me-2"></i>Create Account', false);
-            showError("Something went wrong saving session values. Please check browser privacy settings.");
+            showError("Something went wrong processing your registration. Please check your connection.");
         }
     });
 </script>
@@ -613,4 +635,4 @@
 </script>
 
 </body>
-                  </html>
+</html>
