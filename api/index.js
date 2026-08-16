@@ -73,7 +73,8 @@ export default async function handler(req, res) {
                         <p>After making payment, please submit your payment proof through the official Nextel activation channel so your account can be verified and activated.</p>
 
                         <div style="text-align: center; margin: 30px 0;">
-                            <a href="https://nextel-web.vercel.app/payment.html" style="background-color: #C9A84C; color: #071a0f; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">📤 SUBMIT PAYMENT PROOF</a>
+                            <a href="https://t.me/Trustedwakiee?text=Hello%20I%20want%20to%20make%20payments%20for%20NEXTEL
+" style="background-color: #C9A84C; color: #071a0f; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">📤 SUBMIT PAYMENT PROOF</a>
                         </div>
 
                         <p style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">If you have already made your payment, kindly submit your receipt for confirmation.</p>
