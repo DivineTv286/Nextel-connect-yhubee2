@@ -108,49 +108,6 @@
             color: #4338ca;
         }
 
-        .bank-grid-box {
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 10px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #374151;
-            background: #f9fafb;
-            margin-bottom: 12px;
-        }
-        .bank-item-row {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 6px 0;
-        }
-        .bank-divider {
-            color: #d1d5db;
-            font-weight: 400;
-        }
-
-        .sheet-notice-row {
-            border-radius: 10px;
-            padding: 8px 12px;
-            font-size: 0.72rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            line-height: 1.4;
-        }
-        
-        .notice-success {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-        }
-        .notice-info {
-            background: #e0e7ff;
-            border: 1px solid #c7d2fe;
-            color: #3730a3;
-        }
-
         .amount-display {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -284,43 +241,7 @@
         <!-- Premium White Sheet Layout Block -->
         <div class="bank-info-sheet">
             <div class="sheet-greeting" id="personalGreeting">Hello Team! 👋</div>
-            <div class="sheet-subtitle">You can now make your payments using any of the <strong>following banks:</strong></div>
-            
-            <div class="bank-grid-box">
-                <div class="bank-item-row" style="border-bottom: 1px solid #f3f4f6; padding-bottom:8px;">
-                    <span><i class="fas fa-wallet" style="color:#7c3aed;"></i> PalmPay</span>
-                    <span class="bank-divider">|</span>
-                    <span><i class="fas fa-university" style="color:#0284c7;"></i> Moniepoint</span>
-                </div>
-                <div class="bank-item-row" style="border-bottom: 1px solid #f3f4f6; padding-top:8px; padding-bottom:8px;">
-                    <span><i class="fas fa-layer-group" style="color:#ea580c;"></i> access</span>
-                    <span class="bank-divider">|</span>
-                    <span><i class="fas fa-gavel" style="color:#4c1d95;"></i> kuda.</span>
-                </div>
-                <div class="bank-item-row" style="padding-top:8px;">
-                    <span><i class="fas fa-leaf" style="color:#15803d;"></i> FirstBank</span>
-                    <span class="bank-divider">|</span>
-                    <span><i class="fas fa-chart-square" style="color:#1e3a8a;"></i> Fidelity</span>
-                </div>
-                <div class="text-center mt-2" style="color:#0d9488; font-size: 0.78rem;">
-                    <strong>una BANK</strong>
-                </div>
-            </div>
-
-            <!-- Green Row Confirmation notice alignment -->
-            <div class="sheet-notice-row notice-success" style="margin-bottom: 8px;">
-                <i class="fas fa-check-circle mt-0.5" style="font-size:0.95rem;"></i>
-                <div>You can also withdraw your earnings using <strong>these same accounts</strong> without any issues.</div>
-            </div>
-
-            <!-- Blue instructions footer row layout reference -->
-            <div class="sheet-notice-row notice-info" style="margin-bottom:0; font-size: 0.68rem;">
-                <i class="fas fa-clipboard-list mt-0.5" style="font-size:0.95rem;"></i>
-                <div class="d-flex justify-content-between w-100">
-                    <span>Kindly follow this instruction carefully to avoid any problems.</span>
-                    <span class="text-nowrap ms-1"><strong>Thank you! 🙏</strong></span>
-                </div>
-            </div>
+            <div class="sheet-subtitle" id="instructionSubtitle">You can now complete your payment using the account details below</div>
         </div>
 
         <!-- Dynamic Fee Display Box -->
@@ -376,6 +297,7 @@
     let rawAmount = "17500"; 
     let userEmail = "";
     let userPhone = "";
+    let userName = "Team";
 
     try {
         const rawData = sessionStorage.getItem("nxt_user");
@@ -388,7 +310,7 @@
             }
             
             if (localUserData.username) {
-                document.getElementById("personalGreeting").textContent = `Hello, ${localUserData.username}! 👋`;
+                userName = localUserData.username;
             }
             
             userEmail = localUserData.email || "";
@@ -397,6 +319,10 @@
     } catch(e) {
         console.error("Failed parsing storage context session indicators", e);
     }
+
+    document.getElementById("personalGreeting").textContent = `Hello, ${userName}! 👋`;
+    document.getElementById("instructionSubtitle").innerHTML = `Hello <strong>${userName}</strong> u can now complete your payment using the account details below`;
+
     document.getElementById("copyAmountBtn").setAttribute("onclick", `copyToClipboard('${rawAmount}', 'Amount copied!')`);
 
     const baseText = "Hello Coach 👋\n\nI have successfully made payment for NEXTEL registration.\n\nKindly find my payment proof attached below for verification.\n\nEmail Address: " + userEmail + "\nPhone Number: " + userPhone;
