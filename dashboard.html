@@ -53,6 +53,7 @@
         }
         .brand-text span { color: var(--green-light); }
 
+        /* Animated Support Link replacing the old bars icon */
         .support-link {
             color: var(--green-light);
             font-size: 1.35rem;
@@ -61,7 +62,9 @@
             transition: color 0.3s;
             animation: pulseSupport 2s infinite ease-in-out;
         }
-        .support-link:hover { color: var(--gold); }
+        .support-link:hover {
+            color: var(--gold);
+        }
 
         @keyframes pulseSupport {
             0% { transform: scale(1); opacity: 0.9; }
@@ -81,13 +84,13 @@
             letter-spacing: 0.5px;
         }
 
-        /* Wallet & Cards */
+        /* Section Cards */
         .wallet-card {
             background: linear-gradient(145deg, #0a2215, #06170e);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 20px;
-            padding: 20px;
-            margin-top: 16px;
+            padding: 24px;
+            margin-top: 20px;
         }
 
         .wallet-title {
@@ -111,9 +114,9 @@
         }
 
         .wallet-balance {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin: 8px 0 14px 0;
+            margin: 12px 0 20px 0;
             font-family: sans-serif;
         }
 
@@ -123,7 +126,6 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 16px;
             padding: 16px;
-            margin-top: 16px;
         }
 
         .lines-header {
@@ -162,7 +164,9 @@
             cursor: pointer;
             transition: background 0.2s, border-color 0.2s;
         }
-        .line-row:hover { background: rgba(255, 255, 255, 0.06); }
+        .line-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
         .line-row.selected-line {
             background: rgba(26, 122, 74, 0.12);
             border-color: rgba(37, 160, 96, 0.4);
@@ -274,7 +278,7 @@
         /* --- 3D Flippable Virtual eSIM Card System --- */
         .esim-flip-container {
             perspective: 1000px;
-            margin-top: 10px;
+            margin-top: 16px;
         }
 
         .esim-card-inner {
@@ -303,6 +307,7 @@
             justify-content: space-between;
         }
 
+        /* Front Side Styling */
         .esim-front {
             background: linear-gradient(135deg, #0b2f19, #05180d);
         }
@@ -345,7 +350,7 @@
             width: 32px; height: 24px;
             border: 1.5px solid #4ade80;
             border-radius: 6px;
-            margin: 6px 0;
+            margin: 10px 0;
             position: relative;
         }
         .esim-chip::after {
@@ -378,7 +383,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 10px;
+            padding-top: 12px;
         }
 
         .esim-label {
@@ -396,6 +401,7 @@
         .esim-value.gold { color: #a3e635; }
         .esim-value.success { color: #4ade80; }
 
+        /* Back Side Styling */
         .esim-back {
             background: linear-gradient(135deg, #051c0f, #020d07);
             transform: rotateY(180deg);
@@ -471,10 +477,12 @@
             color: rgba(255, 255, 255, 0.25);
             text-transform: uppercase;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 4px;
             transition: color 0.2s;
         }
-        .flip-footer-trigger:hover { color: var(--green-light); }
+        .flip-footer-trigger:hover {
+            color: var(--green-light);
+        }
 
         /* Tasks Layout Changes */
         .task-row {
@@ -511,7 +519,7 @@
             white-space: nowrap;
         }
 
-        /* SweetAlert Customizations */
+        /* Premium Dark SweetAlert Customizations */
         .swal2-popup.nextel-alert-theme {
             background: #091f13 !important;
             border: 1px solid rgba(201, 168, 76, 0.3) !important;
@@ -536,7 +544,9 @@
             padding: 12px;
             margin-top: 15px;
         }
-        .nextel-pricing-box strong { color: var(--gold); }
+        .nextel-pricing-box strong {
+            color: var(--gold);
+        }
         .swal2-actions { margin-top: 20px !important; }
         .swal-btn-activate {
             background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
@@ -571,8 +581,7 @@
 </header>
 
 <main class="container mt-2">
-    
-    <!-- 1. PREMIUM 3D FLIPPABLE VIRTUAL ESIM CARD (Moved to Top) -->
+    <!-- 1. Premium 3D Flippable Virtual eSIM System Section (Moved to the very top) -->
     <section class="esim-flip-container" id="esimCardContainer">
         <div class="esim-card-inner">
             
@@ -630,10 +639,23 @@
             </div>
 
         </div>
+        <!-- Tap target toggle action trigger footer element -->
         <div class="flip-footer-trigger" onclick="flipEsimCard()">Tap to Flip Layout</div>
     </section>
 
-    <!-- 2. CALL STATS MONITORING DISPLAY -->
+    <!-- 2. Immediate Configuration Call to Actions Grid (Activate Account & Link Bank Details) -->
+    <section class="mt-3">
+        <div class="action-grid" style="margin-top: 0;">
+            <button class="btn-action btn-activate" id="activateProfileBtn">
+                <i class="fas fa-bolt"></i> Activate Account
+            </button>
+            <button class="btn-action btn-bank" onclick="triggerLockedNotice()">
+                <i class="fas fa-university"></i> Link Bank Details
+            </button>
+        </div>
+    </section>
+
+    <!-- 3. Call Statistics Configuration Monitoring Display -->
     <section class="status-card">
         <h4 class="section-title">Your Call Stats</h4>
         <div class="row align-items-center">
@@ -660,7 +682,7 @@
         </div>
     </section>
 
-    <!-- 3. AVAILABLE COUNTRY LINES & WALLET BALANCE -->
+    <!-- 4. Main Wallet & Available Country Line Workspaces Card -->
     <section class="wallet-card">
         <div class="d-flex justify-content-between align-items-center">
             <span class="wallet-title">Your Main Wallet</span>
@@ -698,22 +720,6 @@
                     <i class="fas fa-phone-alt"></i>
                 </button>
             </div>
-        </div>
-    </section>
-
-    <!-- 4. ACCOUNT ACTIVATION & BANKING CTAs (Placed right after the numbers layout) -->
-    <section class="status-card" style="background: linear-gradient(135deg, #0b2516, #071a0f); border-color: rgba(201, 168, 76, 0.2);">
-        <h4 class="section-title" style="color: var(--gold);">Account Actions & Payout Setup</h4>
-        <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
-            Unlock full calling privileges and secure your bank details for instant payouts.
-        </div>
-        <div class="action-grid" style="margin-top: 0;">
-            <button class="btn-action btn-activate" id="activateProfileBtn">
-                <i class="fas fa-bolt"></i> Activate Account
-            </button>
-            <button class="btn-action btn-bank" onclick="triggerLockedNotice()">
-                <i class="fas fa-university"></i> Link Bank Details
-            </button>
         </div>
     </section>
 
