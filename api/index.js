@@ -65,7 +65,7 @@ export default async function handler(req, res) {
 
                         <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #C9A84C;">
                             <p style="margin: 3px 0;"><strong>Bank Name:</strong>PAGA </p>
-                            <p style="margin: 3px 0;"><strong>Account Number:</strong> 9710762021</p>
+                            <p style="margin: 3px 0;"><strong>Account Number:</strong> 2325266235 </p>
                             <p style="margin: 3px 0;"><strong>Account Name:</strong>UWAKMFON V. AKPANOWO - NEXTEL</p>
                             <p style="margin: 3px 0;"><strong>Amount:</strong> ₦${formattedAmount}</p>
                         </div>
